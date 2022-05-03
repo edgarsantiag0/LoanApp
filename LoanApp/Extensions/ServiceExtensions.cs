@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using LoggerService;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LoanApp.Extensions
@@ -21,6 +22,9 @@ namespace LoanApp.Extensions
             {
     
             });
+
+        public static void ConfigureLoggerService(this IServiceCollection services) =>
+            services.AddScoped<ILoggerManager, LoggerManager>();
 
 
     }

@@ -3,17 +3,13 @@ using LoanApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using NLog;
+using System.IO;
 
 namespace LoanApp
 {
@@ -21,6 +17,7 @@ namespace LoanApp
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -31,7 +28,7 @@ namespace LoanApp
         {
             services.ConfigureCors();
             services.ConfigureIISIntegration();
-
+            services.ConfigureLoggerService();
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
