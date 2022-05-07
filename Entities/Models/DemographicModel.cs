@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.Models
+﻿namespace Entities.Models
 {
     public class DemographicModel
     {
@@ -14,6 +10,7 @@ namespace Entities.Models
 }
 
 //Demographic Characteristics
+
 //Age.
 //Gender.
 //Race.

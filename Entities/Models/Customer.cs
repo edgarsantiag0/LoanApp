@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,8 @@ namespace Entities.Models
 
         public string LastName { get; set; }
 
+        public Gender Gender { get; set; } = Gender.Male;
+
         public string Email { get; set; }
 
         public decimal MonthlyNetIncome { get; set; }
@@ -20,7 +23,9 @@ namespace Entities.Models
 
         public DateTime DateOfBirth { get; set; }
 
-        public string StreetAddress { get; set; }
+        public string StreetAddress1 { get; set; }
+
+        public string StreetAddress2 { get; set; }
 
         public int ZipCode { get; set; }
 

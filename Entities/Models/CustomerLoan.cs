@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Models
 {
-    internal class Loan
+    public class CustomerLoan
     {
 
         public decimal Amount { get; set; }

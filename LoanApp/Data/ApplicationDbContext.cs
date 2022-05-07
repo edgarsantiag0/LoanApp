@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Entities.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LoanApp.Data
 {
@@ -12,5 +10,11 @@ namespace LoanApp.Data
             : base(options)
         {
         }
+
+
+
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+
     }
 }
