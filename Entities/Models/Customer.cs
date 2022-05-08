@@ -44,20 +44,22 @@ namespace Entities.Models
 
         public int DemographicModelId { get; set; }
 
+        public int RiskRating { get; set; }
+
         public DemographicModel DemographicModel { get; set; }
 
         public ICollection<CustomerLoan> CustomerLoans { get; set; }
 
 
-        public int RiskRating
-        {
-            get { return (int)((LateLoanPayments + TotalDebt) / CreditRating); }
+        //public int RiskRating
+        //{
+        //    get { return (int)((LateLoanPayments + TotalDebt) / CreditRating); }
 
-            set
-            {
-                RiskRating = (int)((LateLoanPayments + TotalDebt) / CreditRating);
-            }
-        }
+        //    set
+        //    {
+        //        RiskRating = (int)((LateLoanPayments + TotalDebt) / CreditRating);
+        //    }
+        //}
 
 
     }

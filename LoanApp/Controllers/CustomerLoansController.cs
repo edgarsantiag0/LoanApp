@@ -20,8 +20,19 @@ namespace LoanApp.Controllers
         // GET: CustomerLoans
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CustomerLoans.Include(c => c.LoanProduct);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var applicationDbContext = _context.CustomerLoans.Include(c => c.Customer);//.Include(c => c.LoanProduct);
+                return View(await applicationDbContext.ToListAsync());
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+
+          
         }
 
         // GET: CustomerLoans/Details/5

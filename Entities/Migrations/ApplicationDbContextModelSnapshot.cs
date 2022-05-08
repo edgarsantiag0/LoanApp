@@ -523,7 +523,7 @@ namespace Entities.Migrations
                         .IsRequired();
 
                     b.HasOne("Entities.Models.LoanProduct", "LoanProduct")
-                        .WithMany()
+                        .WithMany("CustomerLoans")
                         .HasForeignKey("LoanProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

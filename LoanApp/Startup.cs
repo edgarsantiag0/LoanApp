@@ -29,7 +29,7 @@ namespace LoanApp
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
 
-           // services.ConfigureSqlContext(Configuration);
+            //services.ConfigureSqlContext(Configuration);
             services.ConfigureInMemoryContext();
 
             services.ConfigureRepositoryManager();
