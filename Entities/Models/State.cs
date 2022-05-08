@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.Models
+﻿namespace Entities.Models
 {
     public class State
     {
@@ -11,6 +7,7 @@ namespace Entities.Models
         public string Name { get; set; }
 
         public int CountryId { get; set; }
+
         public Country Country { get; set; }
 
     }

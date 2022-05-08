@@ -1,10 +1,16 @@
-﻿namespace Entities.Models
+﻿using System.Collections.Generic;
+
+namespace Entities.Models
 {
     public class DemographicModel
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Characteristics { get; set; }
+
+        public ICollection<Customer> Customers { get; set; }
 
     }
 }

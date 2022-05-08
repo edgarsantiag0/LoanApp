@@ -1,9 +1,11 @@
-﻿using LoanApp.Data;
+﻿using Contracts;
+using Entities;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repository;
 
 namespace LoanApp.Extensions
 {
@@ -37,6 +39,21 @@ namespace LoanApp.Extensions
 
             return services;
         }
+
+        public static IServiceCollection ConfigureInMemoryContext(this IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationDbContext>(opts =>
+                opts.UseInMemoryDatabase("LoanInMemoryDb"));
+
+            return services;
+        }
+
+
+
+        
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 
     }

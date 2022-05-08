@@ -1,29 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace LoanApp.Data.Migrations
+namespace Entities.Migrations
 {
-    public partial class AddCountry : Migration
+    public partial class AddDemographicModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Countries",
+                name: "DemographicModels",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Characteristics = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Countries", x => x.Id);
+                    table.PrimaryKey("PK_DemographicModels", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Countries");
+                name: "DemographicModels");
         }
     }
 }

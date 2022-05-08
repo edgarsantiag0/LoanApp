@@ -1,7 +1,6 @@
 ﻿using Entities.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Models
 {
@@ -29,21 +28,37 @@ namespace Entities.Models
 
         public int ZipCode { get; set; }
 
-        public int CityId { get; set; }
-
         public string Phone { get; set; }
 
         public string SSN { get; set; }
 
         public int CreditRating { get; set; }
 
-        public int RiskRating { get; set; }
-
         public int LateLoanPayments { get; set; }
 
         public decimal TotalDebt { get; set; }
 
+        public int CityId { get; set; }
+
+        public City City { get; set; }
+
         public int DemographicModelId { get; set; }
+
+        public DemographicModel DemographicModel { get; set; }
+
+        public ICollection<CustomerLoan> CustomerLoans { get; set; }
+
+
+        public int RiskRating
+        {
+            get { return (int)((LateLoanPayments + TotalDebt) / CreditRating); }
+
+            set
+            {
+                RiskRating = (int)((LateLoanPayments + TotalDebt) / CreditRating);
+            }
+        }
+
 
     }
 }

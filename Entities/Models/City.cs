@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Entities.Models
 {
@@ -11,5 +9,10 @@ namespace Entities.Models
         public string Name { get; set; }
 
         public int StateId { get; set; }
+
+        public State State { get; set; }
+
+        public ICollection<Customer> Customers { get; set; }
+
     }
 }

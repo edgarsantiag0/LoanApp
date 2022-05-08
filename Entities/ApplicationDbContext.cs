@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace LoanApp.Data
+namespace Entities
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -11,10 +11,21 @@ namespace LoanApp.Data
         {
         }
 
-
-
         public DbSet<Country> Countries { get; set; }
+
         public DbSet<State> States { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Business> Businesses { get; set; }
+
+        public DbSet<DemographicModel> DemographicModels { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<LoanProduct> LoanProducts { get; set; }
+
+        public DbSet<CustomerLoan> CustomerLoans { get; set; }
 
     }
 }

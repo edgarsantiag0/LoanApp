@@ -1,22 +1,23 @@
-﻿using LoanApp.Models;
+﻿using AutoMapper;
+using Contracts;
+using LoanApp.Models;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LoanApp.Controllers
 {
     public class HomeController : Controller
     {
         private ILoggerManager _logger;
+        private readonly IRepositoryManager _repository;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILoggerManager logger)
+        public HomeController(ILoggerManager logger, IRepositoryManager repository, IMapper mapper)
         {
             _logger = logger;
+            _repository = repository;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -25,6 +26,9 @@ namespace LoanApp.Controllers
             _logger.LogDebug("Here is debug message.");
             _logger.LogWarn("Here is warn message.");
             _logger.LogError("Here is an error message.");
+
+            //  _repository.Country.AnyMethodFromCompanyRepository();
+
 
             return View();
         }

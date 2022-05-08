@@ -1,10 +1,9 @@
-using LoanApp.Data;
+using Entities;
 using LoanApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +28,13 @@ namespace LoanApp
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
-            services.ConfigureSqlContext(Configuration);
+
+           // services.ConfigureSqlContext(Configuration);
+            services.ConfigureInMemoryContext();
+
+            services.ConfigureRepositoryManager();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
