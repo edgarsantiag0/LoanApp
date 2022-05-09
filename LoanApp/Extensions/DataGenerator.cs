@@ -110,7 +110,7 @@ namespace LoanApp.Extensions
                 // Business
 
                 context.Businesses.AddRange(
-                    new Business
+                    new Entities.Models.Business
                     {
                         Id = 1,
                         Name = "Financial 001",
@@ -124,7 +124,7 @@ namespace LoanApp.Extensions
                         WebsiteURL = "",
                         ZipCode = 20120
                     },
-                     new Business
+                     new Entities.Models.Business
                      {
                          Id = 2,
                          Name = "Good Loans xyz",
@@ -138,7 +138,7 @@ namespace LoanApp.Extensions
                          WebsiteURL = "",
                          ZipCode = 10150
                      },
-                      new Business
+                      new Entities.Models.Business
                       {
                           Id = 3,
                           Name = "Jhon Loans",
@@ -357,7 +357,8 @@ namespace LoanApp.Extensions
                         LoanProductId = rnd.Next(1, 4),
                         LoanPurpose = "Purpose: "+ i,
                         LoanRepresentative = "LoanRepresentative: "+ i,
-                        MonthsToPayback = rnd.Next(48, 61)
+                        MonthsToPayback = rnd.Next(48, 61),
+                        IsDeleted = false
                     };
 
                     customerLoans.Add(obj);

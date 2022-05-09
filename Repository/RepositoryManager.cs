@@ -1,41 +1,35 @@
 ﻿using Contracts;
 using Entities;
+using System.Threading.Tasks;
 
 namespace Repository
 {
     public class RepositoryManager : IRepositoryManager
     {
-        private ApplicationDbContext _repositoryContext;
+        private readonly ApplicationDbContext _context;
 
-        private ICountryRepository _countryRepository;
-        //private IEmployeeRepository _employeeRepository;
-
-        public RepositoryManager(ApplicationDbContext repositoryContext)
-        {
-            _repositoryContext = repositoryContext;
-        }
-
-        public ICountryRepository Country
+        public ApplicationDbContext Context
         {
             get
             {
-                if (_countryRepository == null)
-                    _countryRepository = new CountryRepository(_repositoryContext);
-                return _countryRepository;
+                return _context;
             }
         }
 
-        //public IEmployeeRepository Employee
-        //{
-        //    get
-        //    {
-        //        if (_employeeRepository == null)
-        //            _employeeRepository = new EmployeeRepository(_repositoryContext);
-        //        return _employeeRepository;
-        //    }
-        //}
+        public RepositoryManager(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-        public void Save() => _repositoryContext.SaveChanges();
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        public Task SaveAsync()
+        {
+            return _context.SaveChangesAsync();
+        }
 
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Entities.Models
 {
-    public class CustomerLoan
+    public class CustomerLoan : Entity
     {
         public int Id { get; set; }
+
+        public string LoanNumber { get; set; }
 
         public decimal Amount { get; set; }
 

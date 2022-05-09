@@ -1,6 +1,6 @@
 ﻿namespace Entities.Models
 {
-    public class Business
+    public class Business : Entity
     {
         public int Id { get; set; }
 

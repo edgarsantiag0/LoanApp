@@ -2,7 +2,7 @@
 
 namespace Entities.Models
 {
-    public class DemographicModel
+    public class DemographicModel : Entity
     {
         public int Id { get; set; }
 

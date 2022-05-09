@@ -2,7 +2,7 @@
 
 namespace Entities.Models
 {
-    public class City
+    public class City : Entity
     {
         public int Id { get; set; }
 

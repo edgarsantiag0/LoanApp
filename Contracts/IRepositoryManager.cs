@@ -1,9 +1,12 @@
-﻿namespace Contracts
+﻿using Entities;
+using System.Threading.Tasks;
+
+namespace Contracts
 {
     public interface IRepositoryManager
     {
-        ICountryRepository Country { get; }
-        // IEmployeeRepository Employee { get; }
+        ApplicationDbContext Context { get; }
         void Save();
+        Task SaveAsync();
     }
 }

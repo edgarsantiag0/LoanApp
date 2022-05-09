@@ -1,8 +1,13 @@
-﻿using Entities;
+﻿using AutoMapper;
+using Contracts;
+using Entities;
+using Entities.DTOs;
 using Entities.Models;
+using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,11 +15,17 @@ namespace LoanApp.Controllers
 {
     public class CustomerLoansController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IRepositoryManager _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IMapper _mapper;
 
-        public CustomerLoansController(ApplicationDbContext context)
+
+        public CustomerLoansController(IRepositoryManager repository, 
+            ILoggerManager logger, IMapper mapper)
         {
-            _context = context;
+            _repository = repository;
+            _logger = logger;
+            _mapper = mapper;
         }
 
         // GET: CustomerLoans
@@ -22,154 +33,160 @@ namespace LoanApp.Controllers
         {
             try
             {
-                var applicationDbContext = _context.CustomerLoans.Include(c => c.Customer);//.Include(c => c.LoanProduct);
-                return View(await applicationDbContext.ToListAsync());
+               // var customerLoans = await _repository.CustomerLoan.GetAllAsync(trackChanges: false);
+              //  var customerLoansDto = _mapper.Map<IEnumerable<CustomerLoanDto>>(customerLoans);
+
+               
+             //   return View(customerLoansDto);
+
+                return View();
 
             }
             catch (System.Exception ex)
             {
 
-                throw;
+                _logger.LogError($"Something went wrong in the {nameof(Index)}action { ex}");
+                return StatusCode(500, "Internal server error");
             }
 
           
         }
 
-        // GET: CustomerLoans/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: CustomerLoans/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var customerLoan = await _context.CustomerLoans
-                .Include(c => c.Customer)
-                .Include(c => c.LoanProduct)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customerLoan == null)
-            {
-                return NotFound();
-            }
+        //    var customerLoan = await _context.CustomerLoans
+        //        .Include(c => c.Customer)
+        //        .Include(c => c.LoanProduct)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (customerLoan == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(customerLoan);
-        }
+        //    return View(customerLoan);
+        //}
 
-        // GET: CustomerLoans/Create
-        public IActionResult Create()
-        {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
-            ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id");
-            return View();
-        }
+        //// GET: CustomerLoans/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
+        //    ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id");
+        //    return View();
+        //}
 
-        // POST: CustomerLoans/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Amount,Balance,MonthsToPayback,LoanPurpose,LoanRepresentative,Date,CustomerId,LoanProductId")] CustomerLoan customerLoan)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customerLoan);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerLoan.CustomerId);
-            ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id", customerLoan.LoanProductId);
-            return View(customerLoan);
-        }
+        //// POST: CustomerLoans/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Amount,Balance,MonthsToPayback,LoanPurpose,LoanRepresentative,Date,CustomerId,LoanProductId")] CustomerLoan customerLoan)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(customerLoan);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerLoan.CustomerId);
+        //    ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id", customerLoan.LoanProductId);
+        //    return View(customerLoan);
+        //}
 
-        // GET: CustomerLoans/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: CustomerLoans/Edit/5
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var customerLoan = await _context.CustomerLoans.FindAsync(id);
-            if (customerLoan == null)
-            {
-                return NotFound();
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerLoan.CustomerId);
-            ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id", customerLoan.LoanProductId);
-            return View(customerLoan);
-        }
+        //    var customerLoan = await _context.CustomerLoans.FindAsync(id);
+        //    if (customerLoan == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerLoan.CustomerId);
+        //    ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id", customerLoan.LoanProductId);
+        //    return View(customerLoan);
+        //}
 
-        // POST: CustomerLoans/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,Balance,MonthsToPayback,LoanPurpose,LoanRepresentative,Date,CustomerId,LoanProductId")] CustomerLoan customerLoan)
-        {
-            if (id != customerLoan.Id)
-            {
-                return NotFound();
-            }
+        //// POST: CustomerLoans/Edit/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,Balance,MonthsToPayback,LoanPurpose,LoanRepresentative,Date,CustomerId,LoanProductId")] CustomerLoan customerLoan)
+        //{
+        //    if (id != customerLoan.Id)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(customerLoan);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerLoanExists(customerLoan.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerLoan.CustomerId);
-            ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id", customerLoan.LoanProductId);
-            return View(customerLoan);
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(customerLoan);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!CustomerLoanExists(customerLoan.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerLoan.CustomerId);
+        //    ViewData["LoanProductId"] = new SelectList(_context.LoanProducts, "Id", "Id", customerLoan.LoanProductId);
+        //    return View(customerLoan);
+        //}
 
-        // GET: CustomerLoans/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: CustomerLoans/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var customerLoan = await _context.CustomerLoans
-                .Include(c => c.Customer)
-                .Include(c => c.LoanProduct)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customerLoan == null)
-            {
-                return NotFound();
-            }
+        //    var customerLoan = await _context.CustomerLoans
+        //        .Include(c => c.Customer)
+        //        .Include(c => c.LoanProduct)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (customerLoan == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(customerLoan);
-        }
+        //    return View(customerLoan);
+        //}
 
-        // POST: CustomerLoans/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var customerLoan = await _context.CustomerLoans.FindAsync(id);
-            _context.CustomerLoans.Remove(customerLoan);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: CustomerLoans/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var customerLoan = await _context.CustomerLoans.FindAsync(id);
+        //    _context.CustomerLoans.Remove(customerLoan);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        private bool CustomerLoanExists(int id)
-        {
-            return _context.CustomerLoans.Any(e => e.Id == id);
-        }
+        //private bool CustomerLoanExists(int id)
+        //{
+        //    return _context.CustomerLoans.Any(e => e.Id == id);
+        //}
     }
 }

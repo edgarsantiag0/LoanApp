@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Entities.Models.CustomerLoan>
+﻿@model IEnumerable<Entities.DTOs.CustomerLoanDto>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,69 +9,37 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<table id="customerLoansDatatable" class="table table-striped table-bordered dt-responsive nowrap">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
+             <th>
+               Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Balance)
+               Customer
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MonthsToPayback)
+                Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LoanPurpose)
-            </th>
+                Loan Product
+            </th>          
             <th>
-                @Html.DisplayNameFor(model => model.LoanRepresentative)
+                Amount
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LoanProduct)
+              <th>
+                Loan Representative
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Balance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MonthsToPayback)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoanPurpose)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoanRepresentative)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoanProduct.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+    
 </table>
+@section Scripts
+{
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/bootbox.js/bootbox.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/customerLoansDatatable.js"></script>
+}

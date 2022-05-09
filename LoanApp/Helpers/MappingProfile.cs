@@ -7,9 +7,7 @@ namespace LoanApp.Helpers
     {
         public MappingProfile()
         {
-
-            this.AddCountry();
-
+            this.AddCustomerLoan();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Entities.Models
 {
-    public class LoanProduct
+    public class LoanProduct : Entity
     {
         public int Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Entities.Models
 {
-    public class State
+    public class State : Entity
     {
         public int Id { get; set; }
 

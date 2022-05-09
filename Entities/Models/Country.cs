@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.Models
+﻿namespace Entities.Models
 {
-    public class Country
+    public class Country : Entity
     {
         public int Id { get; set; }
 
