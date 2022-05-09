@@ -4,7 +4,7 @@ using Entities.Models;
 
 namespace Entities.Mappers
 {
-    public static class CountryMapper
+    public static class LoanAppMapper
     {
 
         public static Profile AddCustomerLoan(this Profile map)

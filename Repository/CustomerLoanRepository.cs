@@ -54,6 +54,7 @@ namespace Repository
             return await FindAll(trackChanges)
                     .Include(o => o.Customer)
                     .Include(o => o.LoanProduct)
+                        .ThenInclude(o => o.Business)
                     .Filter(modelParameters, Filter)
                     .Search(modelParameters, Search)
                     .Sort(modelParameters, Sort)
@@ -67,10 +68,24 @@ namespace Repository
 
         private IQueryable<CustomerLoan> Filter(IQueryable<CustomerLoan> entities, CustomerLoanParameters modelParameters)
         {
-
-            if (modelParameters.Amount != null)
+            if (modelParameters.MinAmount > 0)
             {
-                entities = entities.Where(e => e.Amount == modelParameters.Amount);
+                entities = entities.Where(e => e.Amount >= modelParameters.MinAmount);
+            }
+
+            if (modelParameters.MaxAmount > 0)
+            {
+                entities = entities.Where(e => e.Amount <= modelParameters.MaxAmount);
+            }
+
+            if (modelParameters.MinCustomerCreditRating > 0)
+            {
+                entities = entities.Where(e => e.Customer.CreditRating >= modelParameters.MinCustomerCreditRating);
+            }
+
+            if (modelParameters.MaxCustomerCreditRating > 0)
+            {
+                entities = entities.Where(e => e.Customer.CreditRating <= modelParameters.MaxCustomerCreditRating);
             }
 
             if (modelParameters.Balance != null)
@@ -115,7 +130,16 @@ namespace Repository
 
             var lowerCaseTerm = modelParameters.SearchTerm.Trim().ToLower();
 
-            return entities.Where(e => e.LoanNumber.ToLower().Contains(lowerCaseTerm));
+            return entities.Where(e => e.LoanNumber.ToLower().Contains(lowerCaseTerm) 
+            || e.Customer.FirstName.ToLower().Contains(lowerCaseTerm)
+            || e.Customer.LastName.ToLower().Contains(lowerCaseTerm)
+            || e.LoanProduct.Business.Name.ToLower().Contains(lowerCaseTerm)
+            || e.LoanProduct.Description.ToLower().Contains(lowerCaseTerm)
+            
+            
+            
+            
+            );
         }
 
         private IQueryable<CustomerLoan> Sort(IQueryable<CustomerLoan> entities, CustomerLoanParameters modelParameters)

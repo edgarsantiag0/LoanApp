@@ -36,11 +36,19 @@ namespace Entities.RequestFeatures
 
         public decimal? Amount { get; set; }
 
-        public decimal MinAmount { get; set; }
+        public decimal MinAmount { get; set; } = 0;
 
-        public decimal MaxAmount { get; set; } = decimal.MaxValue;
+        public decimal MaxAmount { get; set; } = 0;
+
+        public int MinCustomerCreditRating { get; set; } = 0;
+
+        public int MaxCustomerCreditRating { get; set; } = 0;
+
+
 
         public bool ValidAgeRange => MaxAmount > MinAmount;
+
+        public string CustomerName { get; set; }
 
         public decimal? Balance { get; set; }
 
@@ -52,9 +60,13 @@ namespace Entities.RequestFeatures
 
         public DateTime? Date { get; set; }
 
-        public int? CustomerId { get; set; }
+        public int? CustomerId { get; set; } = null;
 
-        public int? LoanProductId { get; set; }
+        public int? LoanProductId { get; set; } = null;
+
+
+        public string BusinessName { get; set; }
+
 
     }
 }

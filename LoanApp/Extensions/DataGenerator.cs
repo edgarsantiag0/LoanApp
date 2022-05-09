@@ -28,17 +28,20 @@ namespace LoanApp.Extensions
                     new Country
                     {
                         Id = 1,
-                        Name = "United States"
+                        Name = "United States",
+                        IsDeleted = false
                     },
                     new Country
                     {
                         Id = 2,
-                        Name = "Canada"
+                        Name = "Canada",
+                        IsDeleted = false
                     }, 
                     new Country
                     {
                         Id = 3,
-                        Name = "Dominican Republic"
+                        Name = "Dominican Republic",
+                        IsDeleted = false
                     }
                     );
 
@@ -49,19 +52,22 @@ namespace LoanApp.Extensions
                     {
                         Id = 1,
                         Name = "Virginia",
-                        CountryId = 1
+                        CountryId = 1,
+                        IsDeleted = false
                     },
                     new State
                     {
                         Id = 2,
                         Name = "New York",
-                        CountryId = 1
+                        CountryId = 1,
+                        IsDeleted = false
                     },
                     new State
                     {
                         Id = 3,
                         Name = "California",
-                        CountryId = 1
+                        CountryId = 1,
+                        IsDeleted = false
                     }
                     );
 
@@ -72,37 +78,43 @@ namespace LoanApp.Extensions
                    {
                        Id = 1,
                        Name = "Centreville",
-                       StateId = 1
+                       StateId = 1,
+                       IsDeleted = false
                    },
                     new City
                     {
                         Id = 2,
                         Name = "Bronx",
-                        StateId = 2
+                        StateId = 2,
+                        IsDeleted = false
                     },
                     new City
                     {
                         Id = 3,
                         Name = "San Francisco",
-                        StateId = 3
+                        StateId = 3,
+                        IsDeleted = false
                     },
                      new City
                      {
                          Id = 4,
                          Name = "Chantilly",
-                         StateId = 1
+                         StateId = 1,
+                         IsDeleted = false
                      },
                       new City
                       {
                           Id = 5,
                           Name = "Brooklyn",
-                          StateId = 2
+                          StateId = 2,
+                          IsDeleted = false
                       },
                       new City
                       {
                           Id = 6,
                           Name = "Los Angeles",
-                          StateId = 3
+                          StateId = 3,
+                          IsDeleted = false
                       }
                    );
 
@@ -122,7 +134,8 @@ namespace LoanApp.Extensions
                         StreetAddress1 = "123 Ave",
                         StreetAddress2 = "Suite 236",
                         WebsiteURL = "",
-                        ZipCode = 20120
+                        ZipCode = 20120,
+                        IsDeleted = false
                     },
                      new Entities.Models.Business
                      {
@@ -136,7 +149,8 @@ namespace LoanApp.Extensions
                          StreetAddress1 = "First st",
                          StreetAddress2 = "Suite 123",
                          WebsiteURL = "",
-                         ZipCode = 10150
+                         ZipCode = 10150,
+                         IsDeleted = false
                      },
                       new Entities.Models.Business
                       {
@@ -150,7 +164,8 @@ namespace LoanApp.Extensions
                           StreetAddress1 = "George Ave",
                           StreetAddress2 = "Suite 789",
                           WebsiteURL = "",
-                          ZipCode = 15124
+                          ZipCode = 15124,
+                          IsDeleted = false
                       }
                     );
 
@@ -169,7 +184,8 @@ namespace LoanApp.Extensions
                         Length = 48,
                         MinAmount = 2000,
                         MaxAmount = 5000,
-                        MonthlyPayment = 230                  
+                        MonthlyPayment = 230,
+                        IsDeleted = false
                     },
                      new LoanProduct
                      {
@@ -180,7 +196,8 @@ namespace LoanApp.Extensions
                          Length = 60,
                          MinAmount = 5000,
                          MaxAmount = 10000,
-                         MonthlyPayment = 230
+                         MonthlyPayment = 230,
+                         IsDeleted = false
                      },
                       new LoanProduct
                       {
@@ -191,7 +208,8 @@ namespace LoanApp.Extensions
                           Length = 72,
                           MinAmount = 8000,
                           MaxAmount = 12000,
-                          MonthlyPayment = 230
+                          MonthlyPayment = 230,
+                          IsDeleted = false
                       }
                     );
 
@@ -203,25 +221,29 @@ namespace LoanApp.Extensions
                    {
                        Id = 1,
                        Characteristics = "Upper middle class, high education, etc ",
-                       Name = "Demo 1"
+                       Name = "Demo 1",
+                       IsDeleted = false
                    },
                     new DemographicModel
                     {
                         Id = 2,
                         Characteristics = "Middle class, xyz",
-                        Name = "Demo 2"
+                        Name = "Demo 2",
+                        IsDeleted = false
                     },
                     new DemographicModel
                     {
                         Id = 3,
                         Characteristics = "Lower middle class, ijk",
-                        Name = "Demo 3"
+                        Name = "Demo 3",
+                        IsDeleted = false
                     },
                     new DemographicModel
                     {
                         Id = 4,
                         Characteristics = "Poor, 123 ",
-                        Name = "Demo 4"
+                        Name = "Demo 4",
+                        IsDeleted = false
                     }
                    );
 
@@ -248,8 +270,9 @@ namespace LoanApp.Extensions
                       StreetAddress1 = "123 Ave",
                       StreetAddress2 =  "apt 547",
                       TotalDebt = rnd.Next(25000, 1000000),
-                      ZipCode = 20120
-                      
+                      ZipCode = 20120,
+                      IsDeleted = false
+
                   },
                    new Customer
                    {
@@ -270,7 +293,8 @@ namespace LoanApp.Extensions
                        StreetAddress1 = "ijk st",
                        StreetAddress2 = "apt 896",
                        TotalDebt = rnd.Next(25000, 1000000),
-                       ZipCode = 11258
+                       ZipCode = 11258,
+                       IsDeleted = false
 
                    },
                    new Customer
@@ -292,7 +316,8 @@ namespace LoanApp.Extensions
                        StreetAddress1 = "123 Ave",
                        StreetAddress2 = "apt 741",
                        TotalDebt = rnd.Next(25000, 1000000),
-                       ZipCode = 12745
+                       ZipCode = 12745,
+                       IsDeleted = false
 
                    },
                    new Customer
@@ -314,7 +339,8 @@ namespace LoanApp.Extensions
                        StreetAddress1 = "Trin Pkwy",
                        StreetAddress2 = "apt 316",
                        TotalDebt = rnd.Next(25000, 1000000),
-                       ZipCode = 20120
+                       ZipCode = 20120,
+                       IsDeleted = false
 
                    },
                    new Customer
@@ -336,7 +362,8 @@ namespace LoanApp.Extensions
                        StreetAddress1 = "NW 123 Ave",
                        StreetAddress2 = "apt 745",
                        TotalDebt = rnd.Next(25000, 1000000),
-                       ZipCode = 19852
+                       ZipCode = 19852,
+                       IsDeleted = false
 
                    }
                   );
@@ -358,7 +385,8 @@ namespace LoanApp.Extensions
                         LoanPurpose = "Purpose: "+ i,
                         LoanRepresentative = "LoanRepresentative: "+ i,
                         MonthsToPayback = rnd.Next(48, 61),
-                        IsDeleted = false
+                        IsDeleted = false,
+                        LoanNumber = string.Format(String.Format("{0:0000000000}", i+1))
                     };
 
                     customerLoans.Add(obj);

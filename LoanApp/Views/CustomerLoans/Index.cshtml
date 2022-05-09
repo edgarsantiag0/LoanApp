@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Entities.DTOs.CustomerLoanDto>
+﻿@using Entities.RequestFeatures
+@model LoanApp.ViewModels.CustomerLoanViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,12 +10,38 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<form method="get">
+
+     <div class="form-row">
+         <div class="form-group">
+             <label for="inputSearch">Search</label>
+             <input asp-for="searchTerm" type="text" class="form-control" id="inputSearch" placeholder="Search name,id, etc">
+         </div>
+
+        <div class="form-group col-md-6">
+          <label for="inputMinAmount">Min. loan amount</label>
+          <input asp-for="minAmount" type="number" class="form-control" id="inputMinAmount" placeholder="Min loan amount">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="inputMaxAmount">Max. loan amount</label>
+            <input asp-for="maxAmount" type="number" class="form-control" id="inputMaxAmount" placeholder="Max loan amount">
+        </div>
+  </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<hr />
+
 <table id="customerLoansDatatable" class="table table-striped table-bordered dt-responsive nowrap">
     <thead>
         <tr>
-             <th>
-               Id
+            <th>
+               Loan number
             </th>
             <th>
                Customer
@@ -34,12 +61,80 @@
             <th></th>
         </tr>
     </thead>
+     <tbody>
+@foreach (var item in Model.data) {
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.LoanNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerFullName)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.LoanProductDescription)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.LoanRepresentative)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a href="#" class="btn-link js-delete" data-customerloan-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
     
 </table>
+
+<div>
+
+    Current page: @Model.data.MetaData.CurrentPage |
+
+Total entries: @Model.data.MetaData.TotalCount
+
+</div>
+
+
+
+<div>
+    <ul class="pagination center">
+        <li class="page-item @(!Model.data.MetaData.ShowFirst? "disabled":"")">
+            <a asp-route-searchTerm="@Model.parameters.SearchTerm" 
+             asp-route-minAmount="@Model.parameters.MinAmount"
+            asp-route-maxAmount="@Model.parameters.MaxAmount"
+            asp-route-pageNumber="1" class="page-link"><i class="fas fa-fast-backward">|<<</i></a>
+        </li>
+
+        <li class="page-item @(!Model.data.MetaData.ShowPrevious? "disabled":"")">
+            <a asp-route-searchTerm="@Model.parameters.SearchTerm" 
+             asp-route-minAmount="@Model.parameters.MinAmount"
+            asp-route-maxAmount="@Model.parameters.MaxAmount"
+            asp-route-pageNumber="@(Model.data.MetaData.CurrentPage -1)" class="page-link"><i class="fa fa-step-backward">|<</i></a>
+        </li>
+        <li class="page-item  @(!Model.data.MetaData.ShowNext? "disabled":"")">
+            <a asp-route-searchTerm="@Model.parameters.SearchTerm" 
+                 asp-route-minAmount="@Model.parameters.MinAmount"
+            asp-route-maxAmount="@Model.parameters.MaxAmount"
+                asp-route-pageNumber="@(Model.data.MetaData.CurrentPage + 1)" class="page-link"><i class="fa fa-step-forward">>|</i></a>
+        </li>
+
+        <li class="page-item  @(!Model.data.MetaData.ShowLast? "disabled":"")">
+            <a asp-route-searchTerm="@Model.parameters.SearchTerm"
+            asp-route-minAmount="@Model.parameters.MinAmount"
+            asp-route-maxAmount="@Model.parameters.MaxAmount"
+            asp-route-pageNumber="@Model.data.MetaData.TotalPages" class="page-link"><i class="fa fa-fast-forward"> >>| </i></a>
+        </li>
+    </ul>
+</div>
 @section Scripts
 {
-    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
     <script src="~/lib/bootbox.js/bootbox.min.js"></script>
-    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/js/customerLoansDatatable.js"></script>
 }

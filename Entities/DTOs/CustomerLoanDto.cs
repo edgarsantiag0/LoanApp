@@ -27,6 +27,8 @@ namespace Entities.DTOs
 
         public string CustomerFullName { get; set; }
 
+        public string LoanNumber { get; set; }
+
 
 
 

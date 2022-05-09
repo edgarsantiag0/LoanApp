@@ -3,6 +3,8 @@ using Contracts;
 using Entities;
 using Entities.DTOs;
 using Entities.Models;
+using Entities.RequestFeatures;
+using LoanApp.ViewModels;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,31 +17,32 @@ namespace LoanApp.Controllers
 {
     public class CustomerLoansController : Controller
     {
-        private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
-        private readonly IMapper _mapper;
+        private readonly ICustomerLoanBusiness _business;
 
 
-        public CustomerLoansController(IRepositoryManager repository, 
+        public CustomerLoansController(ICustomerLoanBusiness business, 
             ILoggerManager logger, IMapper mapper)
         {
-            _repository = repository;
+            _business = business;
             _logger = logger;
-            _mapper = mapper;
         }
 
         // GET: CustomerLoans
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] CustomerLoanParameters parameters)
         {
             try
             {
-               // var customerLoans = await _repository.CustomerLoan.GetAllAsync(trackChanges: false);
-              //  var customerLoansDto = _mapper.Map<IEnumerable<CustomerLoanDto>>(customerLoans);
+                var data = await _business.GetPagedListDto(parameters, trackChanges: false);
 
-               
-             //   return View(customerLoansDto);
+                
 
-                return View();
+                return View(new CustomerLoanViewModel
+                {
+                    data = data,
+                    parameters = parameters
+                });
+
 
             }
             catch (System.Exception ex)
