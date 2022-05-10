@@ -1,16 +1,13 @@
-﻿using Entities.Models;
+﻿using Entities.DTOs;
 using System.ComponentModel.DataAnnotations;
 
-namespace Entities.DTOs
+namespace LoanApp.ViewModels
 {
-    public class CustomerLoanAddUpdateDto
+    public class CustomerLoanAddUpdateViewModel
     {
-        // Customer data
-
         public CustomerAddUpdateDto Customer { get; set; }
 
         public Entities.Models.Business Business { get; set; }
-
 
         // Business selected
 
@@ -30,6 +27,5 @@ namespace Entities.DTOs
 
         [Required]
         public int LoanProductId { get; set; }
-
     }
 }
