@@ -14,13 +14,7 @@ $(document).ready(function () {
                     url: "/api/customerloans/" + button.attr("data-customerloan-id"),
                     method: "DELETE",
                     success: function () {
-
-                       // console.log(button.parents("tr"));
-
                         button.closest('tr').remove()
-
-
-                      //  table.row(button.parents("tr")).remove().draw();
                     }
                 });
             }
