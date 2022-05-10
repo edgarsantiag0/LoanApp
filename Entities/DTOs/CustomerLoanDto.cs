@@ -21,17 +21,11 @@ namespace Entities.DTOs
 
         public DateTime Date { get; set; }
 
-
-
         public int CustomerId { get; set; }
 
         public string CustomerFullName { get; set; }
 
         public string LoanNumber { get; set; }
-
-
-
-
 
         public int LoanProductId { get; set; }
 

@@ -9,6 +9,7 @@ using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,13 +20,16 @@ namespace LoanApp.Controllers
     {
         private readonly ILoggerManager _logger;
         private readonly ICustomerLoanBusiness _business;
+        private readonly IRepositoryManager _repository;
 
 
         public CustomerLoansController(ICustomerLoanBusiness business, 
-            ILoggerManager logger, IMapper mapper)
+            ILoggerManager logger, IMapper mapper,
+            IRepositoryManager repository)
         {
             _business = business;
             _logger = logger;
+            _repository = repository;
         }
 
         // GET: CustomerLoans
@@ -53,6 +57,33 @@ namespace LoanApp.Controllers
             }
 
           
+        }
+
+        public IActionResult Create()
+        {
+            Random rnd = new Random();
+
+
+            var vm = new CustomerLoanAddUpdateDto
+            {
+                Business = _repository.Context.Businesses.Find(rnd.Next(1, 4))
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CustomerLoanAddUpdateDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                dto.LoanProductId = 1;
+
+                await _business.AddAsync(dto);
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(dto);
         }
 
         //// GET: CustomerLoans/Details/5

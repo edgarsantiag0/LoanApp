@@ -19,6 +19,8 @@ namespace Entities.Mappers
 
             map.CreateMap<CustomerLoan, CustomerLoanAddUpdateDto>();
 
+            map.CreateMap<Customer, CustomerAddUpdateDto>();
+
             map.CreateMap<CustomerLoanAddUpdateDto, CustomerLoan>();              
 
 

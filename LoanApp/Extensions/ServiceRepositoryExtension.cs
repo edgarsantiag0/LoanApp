@@ -13,6 +13,7 @@ namespace LoanApp.Extensions
 
 
             services.AddScoped<ICustomerLoanRepository, CustomerLoanRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             return services;
         }

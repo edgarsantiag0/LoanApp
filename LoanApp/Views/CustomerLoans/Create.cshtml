@@ -1,4 +1,4 @@
-﻿@model Entities.Models.CustomerLoan
+﻿@model Entities.DTOs.CustomerLoanAddUpdateDto
 
 @{
     ViewData["Title"] = "Create";
@@ -8,20 +8,163 @@
 
 <h4>CustomerLoan</h4>
 <hr />
+
+
+
+
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Customer info</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Business info</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Loan application</a>
+  </li>
+</ul>
+
+
+
+<div class="tab-content" id="myTabContent">
+    
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+           <div class="form-group">
+                <label asp-for="Customer.FirstName" class="control-label"></label>
+                <input asp-for="Customer.FirstName" class="form-control" />
+                <span asp-validation-for="Customer.FirstName" class="text-danger"></span>
+            </div>
+
+               <div class="form-group">
+                <label asp-for="Customer.LastName" class="control-label"></label>
+                <input asp-for="Customer.LastName" class="form-control" />
+                <span asp-validation-for="Customer.LastName" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                <label asp-for="Customer.Gender" class="control-label"></label>
+                <input asp-for="Customer.Gender" class="form-control" />
+                <span asp-validation-for="Customer.Gender" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                <label asp-for="Customer.Email" class="control-label"></label>
+                <input asp-for="Customer.Email" class="form-control" />
+                <span asp-validation-for="Customer.Email" class="text-danger"></span>
+            </div>
+
+               <div class="form-group">
+                <label asp-for="Customer.MonthlyNetIncome" class="control-label"></label>
+                <input asp-for="Customer.MonthlyNetIncome" class="form-control" />
+                <span asp-validation-for="Customer.MonthlyNetIncome" class="text-danger"></span>
+            </div>
+
+                       <div class="form-group">
+                <label asp-for="Customer.SourceIncome" class="control-label"></label>
+                <input asp-for="Customer.SourceIncome" class="form-control" />
+                <span asp-validation-for="Customer.SourceIncome" class="text-danger"></span>
+            </div>
+
+                       <div class="form-group">
+                <label asp-for="Customer.DateOfBirth" class="control-label"></label>
+                <input asp-for="Customer.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Customer.DateOfBirth" class="text-danger"></span>
+            </div>
+
+                       <div class="form-group">
+                <label asp-for="Customer.StreetAddress1" class="control-label"></label>
+                <input asp-for="Customer.StreetAddress1" class="form-control" />
+                <span asp-validation-for="Customer.StreetAddress1" class="text-danger"></span>
+            </div>
+
+                 <div class="form-group">
+                <label asp-for="Customer.StreetAddress2" class="control-label"></label>
+                <input asp-for="Customer.StreetAddress2" class="form-control" />
+                <span asp-validation-for="Customer.StreetAddress2" class="text-danger"></span>
+            </div>
+
+                 <div class="form-group">
+                <label asp-for="Customer.ZipCode" class="control-label"></label>
+                <input asp-for="Customer.ZipCode" class="form-control" />
+                <span asp-validation-for="Customer.ZipCode" class="text-danger"></span>
+            </div>
+
+                 <div class="form-group">
+                <label asp-for="Customer.Phone" class="control-label"></label>
+                <input asp-for="Customer.Phone" class="form-control" />
+                <span asp-validation-for="Customer.Phone" class="text-danger"></span>
+            </div>
+
+                 <div class="form-group">
+                <label asp-for="Customer.SSN" class="control-label"></label>
+                <input asp-for="Customer.SSN" class="form-control" />
+                <span asp-validation-for="Customer.SSN" class="text-danger"></span>
+            </div>
+
+                 <div class="form-group">
+                <label asp-for="Customer.CityId" class="control-label"></label>
+                <input asp-for="Customer.CityId" class="form-control" />
+                <span asp-validation-for="Customer.CityId" class="text-danger"></span>
+            </div>
+      
+    </div>
+
+
+
+
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      
+       
+                
+                <input asp-for="BusinessId" type="hidden" class="form-control" value="@Model.Business.Id" />
+        
+         
+
+
+              <div class="form-group">
+                <label asp-for="Business.Name" class="control-label"></label>
+                <input asp-for="Business.Name" disabled class="form-control" />
+                <span asp-validation-for="Business.Name" class="text-danger"></span>
+            </div>
+
+              <div class="form-group">
+                <label asp-for="Business.About" class="control-label"></label>
+                <input asp-for="Business.About" disabled class="form-control" />
+                <span asp-validation-for="Business.About" class="text-danger"></span>
+            </div>
+
+                    <div class="form-group">
+                <label asp-for="Business.StreetAddress1" class="control-label"></label>
+                <input asp-for="Business.StreetAddress1" disabled class="form-control" />
+                <span asp-validation-for="Business.StreetAddress1" class="text-danger"></span>
+            </div>
+
+               <div class="form-group">
+                <label asp-for="Business.Phone" class="control-label"></label>
+                <input asp-for="Business.Phone" disabled class="form-control" />
+                <span asp-validation-for="Business.Phone" class="text-danger"></span>
+            </div>
+      
+      
+    </div>
+
+
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+         <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
                 <input asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Balance" class="control-label"></label>
-                <input asp-for="Balance" class="form-control" />
-                <span asp-validation-for="Balance" class="text-danger"></span>
-            </div>
+         
             <div class="form-group">
                 <label asp-for="MonthsToPayback" class="control-label"></label>
                 <input asp-for="MonthsToPayback" class="form-control" />
@@ -32,27 +175,24 @@
                 <input asp-for="LoanPurpose" class="form-control" />
                 <span asp-validation-for="LoanPurpose" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LoanRepresentative" class="control-label"></label>
-                <input asp-for="LoanRepresentative" class="form-control" />
-                <span asp-validation-for="LoanRepresentative" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="LoanProductId" class="control-label"></label>
-                <select asp-for="LoanProductId" class ="form-control" asp-items="ViewBag.LoanProductId"></select>
-            </div>
-            <div class="form-group">
+
+    
+      
+      
+    </div>
+
+
+
+</div>
+
+
+        <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
+
+
+          
         </form>
     </div>
 </div>
